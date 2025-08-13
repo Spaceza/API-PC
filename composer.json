@@ -1,0 +1,19 @@
+{
+    "name": "raphael/api_pc",
+    "description": "API de Produtos para PC.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Config\\": "Config/",
+            "Controller\\": "Controller/",
+            "Model\\": "Model/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Raphael",
+            "email": "raphaelssposito@email.com"
+        }
+    ],
+    "require": {}
+}
