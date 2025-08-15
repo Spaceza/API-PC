@@ -175,5 +175,5 @@ Remove permanentemente um produto do banco de dados.
     -   `id` (integer, **Obrigatório**): O ID do produto a ser deletado.
 
    ```json
-    ```
+   
 
