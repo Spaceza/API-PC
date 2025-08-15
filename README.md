@@ -170,10 +170,9 @@ Modifica as informações de um produto existente.
 
 Remove permanentemente um produto do banco de dados.
 
--   **URL:** `http://localhost/API_PC/id=1`
+-   **URL:** `http://localhost/API_PC/index.php?id=1`
 -   **Parâmetros da URL:**
     -   `id` (integer, **Obrigatório**): O ID do produto a ser deletado.
-    -   
-    ---
----
 
+---
+---
