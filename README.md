@@ -95,7 +95,7 @@ INSERT INTO `categories` (`id`, `nome`) VALUES
 
 A URL base para todas as requisições é o arquivo `index.php` do seu projeto. Os parâmetros de ID são passados via `query string` (ex: `?id=1`).
 
-**URL Base:** `http://localhost/API_PC/index.php`
+**URL Base:** `http://localhost/API_PC/`
 
 ### **Recurso: Produtos**
 
@@ -107,7 +107,7 @@ Este recurso representa os componentes de hardware no nosso catálogo.
 
 Adiciona um novo componente ao banco de dados.
 
--   **URL:** `http://localhost/API_PC/index.php`
+-   **URL:** `http://localhost/API_PC/`
 -   **Parâmetros do Corpo (JSON):**
     -   `nome` (string, **Obrigatório**): O nome do produto.
     -   `categoria_id` (integer, **Obrigatório**): O ID da categoria à qual o produto pertence.
@@ -134,7 +134,7 @@ Adiciona um novo componente ao banco de dados.
 
 Retorna uma lista com um resumo de todos os produtos no catálogo.
 
--   **URL:** `http://localhost/API_PC/index.php`
+-   **URL:** `http://localhost/API_PC/`
 -   **Resposta de Sucesso (`200 OK`):** Um array de objetos, onde cada objeto é um produto.
 
 ---
@@ -143,7 +143,7 @@ Retorna uma lista com um resumo de todos os produtos no catálogo.
 
 Retorna os detalhes completos de um único produto, especificado pelo seu ID.
 
--   **URL:** `http://localhost/API_PC/index.php?id=1`
+-   **URL:** `http://localhost/API_PC/?id=1`
 -   **Parâmetros da URL:**
     -   `id` (integer, **Obrigatório**): O ID único do produto a ser buscado.
 
@@ -153,7 +153,7 @@ Retorna os detalhes completos de um único produto, especificado pelo seu ID.
 
 Modifica as informações de um produto existente.
 
--   **URL:** `http://localhost/API_PC/index.php?id=1`
+-   **URL:** `http://localhost/API_PC/?id=1`
 -   **Parâmetros da URL:**
     -   `id` (integer, **Obrigatório**): O ID do produto a ser atualizado.
 -   **Parâmetros do Corpo (JSON):** Envie apenas os campos que deseja alterar.
@@ -170,7 +170,7 @@ Modifica as informações de um produto existente.
 
 Remove permanentemente um produto do banco de dados.
 
--   **URL:** `http://localhost/API_PC/index.php?id=1`
+-   **URL:** `http://localhost/API_PC/id=1`
 -   **Parâmetros da URL:**
     -   `id` (integer, **Obrigatório**): O ID do produto a ser deletado.
 
@@ -185,7 +185,7 @@ Remove permanentemente um produto do banco de dados.
 
 #### **`POST` (Criar uma nova categoria)**
 
--   **URL:** `http://localhost/API_PC/index.php` (Endpoint a ser definido no roteador)
+-   **URL:** `http://localhost/API_PC/` (Endpoint a ser definido no roteador)
 -   **Corpo da Requisição (JSON):**
     ```json
     {
@@ -195,15 +195,15 @@ Remove permanentemente um produto do banco de dados.
 
 #### **`GET` (Listar todas as categorias)**
 
--   **URL:** `http://localhost/API_PC/index.php` (Endpoint a ser definido no roteador)
+-   **URL:** `http://localhost/API_PC/` (Endpoint a ser definido no roteador)
 
 #### **`GET` (Buscar uma categoria específica)**
 
--   **URL:** `http://localhost/API_PC/index.php?id=1` (Endpoint a ser definido no roteador)
+-   **URL:** `http://localhost/API_PC/?id=1` (Endpoint a ser definido no roteador)
 
 #### **`PUT` (Atualizar uma categoria)**
 
--   **URL:** `http://localhost/API_PC/index.php?id=1` (Endpoint a ser definido no roteador)
+-   **URL:** `http://localhost/API_PC/?id=1` (Endpoint a ser definido no roteador)
 -   **Corpo da Requisição (JSON):**
     ```json
     {
@@ -213,6 +213,6 @@ Remove permanentemente um produto do banco de dados.
 
 #### **`DELETE` (Deletar uma categoria)**
 
--   **URL:** `http://localhost/API_PC/index.php?id=1` (Endpoint a ser definido no roteador)
+-   **URL:** `http://localhost/API_PC/?id=1` (Endpoint a ser definido no roteador)
 
 ```
