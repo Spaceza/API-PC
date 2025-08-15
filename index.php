@@ -1,46 +1,59 @@
 <?php
 
-// --- CABEÇALHOS OBRIGATÓRIOS ---
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-// Responde à requisição pre-flight OPTIONS do CORS
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    exit(0);
-}
-
-// --- AUTOLOAD DO COMPOSER ---
-// Carrega todas as nossas classes (Controller, Model, etc.) automaticamente.
+// Carrega todas as nossas classes via Composer
 require __DIR__ . '/vendor/autoload.php';
 
-// --- ROTEAMENTO ---
-// Analisa a URL para determinar o recurso e o ID
-$uri = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
+// Usa as classes que vamos precisar
+use Controller\ProductController;
+use Model\Connection;
 
-// Ignora o nome da pasta do projeto se a API não estiver na raiz do domínio
-// Ajuste 'API_PC' se o nome da sua pasta for diferente.
-if (isset($uri[0]) && strtolower($uri[0]) === strtolower('API_PC')) {
-    array_shift($uri);
+// --- CABEÇALHOS ESSENCIAIS PARA A API ---
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// Lida com a requisição pré-voo (preflight) do navegador
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200 );
+    exit;
 }
 
-$resource = $uri[0] ?? null;
-$id = $uri[1] ?? null;
+// --- ROTEADOR SIMPLES (ESTILO API DO SEU AMIGO) ---
 
-// Direciona a requisição para o controlador apropriado
-switch ($resource) {
-    case 'products':
-        (new Controller\ProductController())->handleRequest($_SERVER['REQUEST_METHOD'], $id);
-        break;
-    case 'categories':
-        // Exemplo para quando você criar o controlador de categorias
-        // (new Controller\CategoryController())->handleRequest($_SERVER['REQUEST_METHOD'], $id);
-        http_response_code(501 ); // Not Implemented
-        echo json_encode(["message" => "Endpoint de categorias ainda não implementado."]);
-        break;
-    default:
-        http_response_code(404 ); // Not Found
-        echo json_encode(["message" => "Endpoint não encontrado. Use /products ou /categories."]);
-        break;
+// Pega o método da requisição (GET, POST, etc.)
+$method = $_SERVER['REQUEST_METHOD'];
+
+// Pega o ID da URL, se ele existir (ex: ?id=1)
+$id = $_GET['id'] ?? null;
+
+// Instancia o nosso controlador
+$controller = new ProductController();
+
+// --- LÓGICA DE DECISÃO ---
+
+if ($method === 'GET' && $id === null) {
+    // Se for GET e não tiver ID, lista todos os produtos.
+    $controller->handleRequest('GET');
+
+} elseif ($method === 'GET' && $id !== null) {
+    // Se for GET e tiver um ID, busca um produto específico.
+    $controller->handleRequest('GET', $id);
+
+} elseif ($method === 'POST') {
+    // Se for POST, cria um novo produto.
+    $controller->handleRequest('POST');
+
+} elseif ($method === 'PUT' && $id !== null) {
+    // Se for PUT e tiver um ID, atualiza o produto.
+    $controller->handleRequest('PUT', $id);
+
+} elseif ($method === 'DELETE' && $id !== null) {
+    // Se for DELETE e tiver um ID, deleta o produto.
+    $controller->handleRequest('DELETE', $id);
+
+} else {
+    // Se nenhuma das condições acima for atendida, a rota é inválida.
+    http_response_code(404 );
+    echo json_encode(["message" => "Rota não encontrada ou ID ausente para a operação."]);
 }
