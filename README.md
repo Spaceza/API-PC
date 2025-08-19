@@ -155,6 +155,6 @@ Remove permanentemente um produto do banco de dados.
 -   **Parâmetros da URL:**
     -   `id` (integer, **Obrigatório**): O ID do produto a ser deletado.
 
-   ```json
+
    
 
