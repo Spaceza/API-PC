@@ -1,10 +1,4 @@
-Visão Geral
 
-Bem-vindo à documentação oficial da API de Componentes de PC. Esta é uma API RESTful construída em PHP, projetada para gerenciar um catálogo de componentes de computador. A API permite a manipulação completa dos recursos de **Produtos** e **Categorias** através de operações CRUD (Create, Read, Update, Delete).
-
-A arquitetura segue as melhores práticas, utilizando `namespaces`, `autoload` do Composer, uma estrutura Modelo-Controlador e um banco de dados relacional com chaves estrangeiras para garantir a integridade dos dados.
-
----
 
 ## Guia de Instalação e Configuração
 
